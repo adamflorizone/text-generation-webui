@@ -8,8 +8,8 @@ ARG APP_UID="${APP_UID:-6972}"
 ARG APP_GID="${APP_GID:-6972}"
 # create / update build env
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked,rw \
-    apt update && \
-    apt install --no-install-recommends -y git vim build-essential python3-dev pip && \
+    apt update --fix-missing && \
+    apt install --no-install-recommends --fix-missing -y git vim build-essential python3-dev pip && \
     rm -rf /var/lib/apt/lists/*
 RUN --mount=type=cache,target=/root/.cache/pip,rw \
     pip3 install --global --upgrade pip wheel setuptools && \
